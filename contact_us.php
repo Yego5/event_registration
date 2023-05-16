@@ -15,7 +15,7 @@ $conn = mysqli_connect($server,$username,$password,$database);
       if( isset( $_POST["submitButton"]))
         {
               $firstname = $_POST['firstname'];
-              $firstname = $_POST['firstname'];
+              $lastname = $_POST['lastname'];
               $phone =$_POST['phone'];
               $email = $_POST['email'];
               $message =$_POST['message'];
@@ -93,7 +93,7 @@ $conn = mysqli_connect($server,$username,$password,$database);
             <div class="row mb-3">
                 <div class="col-lg-6">
                     <label for="name" class="form-label">Fist Name</label>
-                    <input type="text" id="name" name="fistname" class="form-control" >
+                    <input type="text" id="name" name="firstname" class="form-control" >
                 </div>
                 <div class="col-lg-6">
                     <label for="name" class="form-label">Last Name</label>

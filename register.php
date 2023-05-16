@@ -1,3 +1,54 @@
+<?php
+
+    $server ="localhost";
+    $username ="root";
+    $password ="";
+    $database ="Classwork";
+    $message ="";
+ 
+//database connection using mysql_connect
+    $conn = mysqli_connect($server,$username,$password,$database);
+
+//test if connection is successfull
+    if ($conn){
+      // echo "Database connected successfuly";
+    }
+    else
+    {
+        echo "error occured".mysqli_error($conn);
+    }
+
+ //isset function to submit our form
+    if( isset( $_POST["submitbtn"]))
+    {
+
+        //fetch form data
+            $fullname = $_POST['fullname'];
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            $gender = $_POST['gender'];
+            $course = $_POST['course'];
+
+        //submit to database
+            $sql = mysqli_query($conn, "INSERT INTO register_your_details(fullname,phone,email,gender,course) VALUES('$fullname','$phone','$email','$gender','$course')");
+
+        //cheking if success
+        if($sql)
+            {
+            $message = "Data inserted Successfuly";
+            }
+        else
+        {
+            $message = "error occered";
+        }
+    }
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,29 +107,32 @@
                         new in town or just cruising through we've got loads of great tips and events for you.
                     </p>
                     <h3>Sign up today!</h3>
+                    <?php
+                        echo $message
+                    ?>
                 </div>
-                <form>
+                <form action ="register.php" method ="POST">
                     <div class="row mb-3">
                         <div class="col-lg-6">
                             <label for="name" class="form-label">Full Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                            <input type="text" id="name" name ="fullname" class="form-control" placeholder="Enter your name">
                         </div>
                         <div class="col-lg-6">
                             <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-6">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email">
                         </div>
                         <div class="col-lg-6">
                             <label for="gender" class="form-label">Whats your gender</label>
-                            <select class="form-select" id="gender">
+                            <select class="form-select" id="gender" name ="gender">
                                 <option value="">Select-gender--</option>
-                                <option value="">Male</option>
-                                <option value="">Female</option>
+                                <option >Male</option>
+                                <option >Female</option>
                             </select>
                         </div>
                     </div>
@@ -89,10 +143,10 @@
                         </p>
                         <div class="col-lg-6">
                             <label for="gender" class="form-label">Whats your preffered course ?</label>
-                            <select class="form-select" id="gender">
+                            <select class="form-select" id="" name = "course">
                                 <option value="">Select-course--</option>
-                                <option value="">Web</option>
-                                <option value="">Mobile</option>
+                                <option >Web</option>
+                                <option >Mobile</option>
                             </select>
                         </div>
                     </div>
@@ -110,7 +164,7 @@
                     </div>
                     <div class="row py-4">
                         <div class="col-lg-4">
-                            <button class="btn btn-primary">Submit application</button>
+                            <button type="submit" name="submitbtn" class="btn btn-primary">Submit application</button>
                         </div>
                     </div>
                 </form>
